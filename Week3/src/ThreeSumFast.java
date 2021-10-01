@@ -62,7 +62,7 @@ public class ThreeSumFast {
      * @param args the command-line arguments
      */
     public static void main(String[] args)  {
-        In in = new In("D:\\Hoctap\\JavaProjects\\algs4-data\\4Kints.txt");
+        In in = new In("D:\\DSAlib\\algs4-data\\4Kints.txt");
         int[] a = in.readAllInts();
 
         Stopwatch timer = new Stopwatch();
