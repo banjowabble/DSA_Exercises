@@ -50,16 +50,12 @@ public class HackerRank {
      */
     public static SinglyLinkedListNode insertNodeAtPosition(SinglyLinkedListNode llist, int data, int position) {
         SinglyLinkedListNode newNode = new SinglyLinkedListNode(data);
-        SinglyLinkedListNode oldPos = llist;
-        SinglyLinkedListNode p = llist;
-        for (int i = 0; i < position ; i++) {
-            oldPos = oldPos.next;
+        SinglyLinkedListNode prev = llist;
+        for (int i = 0; i < position - 1; i++) {
+            prev = prev.next;
         }
-        for (int i = 1; i < position; i++) {
-            p = p.next;
-        }
-        p.next = newNode;
-        newNode.next = oldPos;
+        newNode.next = prev.next;
+        prev.next = newNode;
         return llist;
     }
 
