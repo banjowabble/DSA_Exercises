@@ -1,0 +1,2 @@
+Due to Selection sort having running time of O(n^2), everytime input array's size doubles (from 2Kints to 4Kints to 8Kints...)
+the running time quadruples.
