@@ -30,15 +30,19 @@ public class Exercise2 {
             }
         }
     }
+
+    //check if a string of brackets is balanced
     public static String isBalanced(String s) {
         // Write your code here
         LinkedStack leftBrackets = new LinkedStack();
         for (int i = 0; i < s.length(); i++) {
+            //check for opening brackets to push into leftBrackets
             if (s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '[') {
                 leftBrackets.push(s.charAt(i));
             } else {
                 //when there are no closing brackets left in the string
                 if (leftBrackets.isEmpty()) return "NO";
+                //found a closing bracket
                 else {
                     char temp = leftBrackets.pop();
                     if (temp == '(' && s.charAt(i) != ')') return "NO";
@@ -48,6 +52,6 @@ public class Exercise2 {
             }
         }
         if (leftBrackets.isEmpty()) return "YES";
-        else return "NO"; //when theres one or more opening brackets left in the stack
+        else return "NO"; //when there's one or more opening brackets left in the stack
     }
 }
