@@ -56,4 +56,7 @@ public class Exercise7 {
             System.out.print(integer + "");
         }
     }
+
+    //partition takes linear time (N)
+    //betterFineMedian takes log(N) (cuz its similar to binarySearch)
 }
