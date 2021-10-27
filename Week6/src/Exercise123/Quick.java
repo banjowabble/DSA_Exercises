@@ -37,7 +37,7 @@ public class Quick
 
     public static void sort(int[] a)
     {
-        StdRandom.shuffle(a);
+        //StdRandom.shuffle(a);
         sort(a, 0, a.length - 1);
     }
 
@@ -50,7 +50,7 @@ public class Quick
     }
 
     private static void testTestData() {
-        In in = new In("D:\\DSAlib\\algs4-data\\1Kints.txt");
+        In in = new In("D:\\DSAlib\\algs4-data\\32Kints.txt");
         int[] a = in.readAllInts();
         long start = System.currentTimeMillis();
         sort(a);
@@ -73,7 +73,7 @@ public class Quick
     }
 
     private static void testAscendingData() {
-        In in = new In("D:\\DSAlib\\algs4-data\\32Kints.txt");
+        In in = new In("D:\\DSAlib\\algs4-data\\8Kints.txt");
         int[] a = in.readAllInts();
         sort(a);
         long start = System.currentTimeMillis();
@@ -84,7 +84,7 @@ public class Quick
     }
 
     private static void testDescendingData() {
-        In in = new In("D:\\DSAlib\\algs4-data\\32Kints.txt");
+        In in = new In("D:\\DSAlib\\algs4-data\\8Kints.txt");
         int[] a = in.readAllInts();
         sort(a);
         reverse(a);
@@ -110,7 +110,7 @@ public class Quick
         //testRandomData(32000);
         //testAscendingData();
         //testDescendingData();
-        testEqualData(32000);
+        //testEqualData(32000);
     }
 
     private static void reverse(int[] a) {

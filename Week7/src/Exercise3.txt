@@ -1,0 +1,4 @@
+Insertion sort: có thể là Linked List, nên là Double Linked List. Bởi vì mỗi lần compare và exchange chỉ truy cập với phần tử đứng ngay trước phần tử đang xét,
+phù hợp với kiểu truy cập tuần tự của linked list.
+Selection sort: không thể là Linked List. Bởi vì mỗi lần compare và exhange có thể là truy cập một phần tử cách xa,
+mà linked list thì việc truy cập ngẫu nhiên các phần tử không được tối ưu như array.
