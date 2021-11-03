@@ -15,9 +15,4 @@ public class Exercise2 {
         }
         return result;
     }
-
-    public static void main(String[] args) {
-        List <Integer> result = new ArrayList<>();
-        System.out.println(result.get(0));
-    }
 }

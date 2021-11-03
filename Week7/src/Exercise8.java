@@ -13,7 +13,9 @@ public class Exercise8<Item extends Comparable<Item>> {
             if (arr[i].compareTo(arr[min]) < 0) min = i;
         }
         exchange(arr, min, K - 1);
-        return arr[--K];
+        Item item = arr[--K];
+        arr[K] = null; //avoid loitering
+        return item;
     }
 
     public void exchange(Item[] arr, int i, int j) {
