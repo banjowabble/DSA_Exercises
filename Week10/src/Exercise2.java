@@ -9,9 +9,9 @@ public class Exercise2 {
     //height = number of links from that node to the farthest leaf
     public static int height(Node root) {
         // Write your code here.
-        if (root == null || (root.left == null && root.right == null)) {
-            //empty tree || reached a leaf (basic case)
-            return 0;
+        if (root == null) {
+            //empty tree (basic case)
+            return -1;
         } else {
             //itself + the further of the two left and right subtrees' heights
             return 1 + Math.max(height(root.left), height(root.right));
