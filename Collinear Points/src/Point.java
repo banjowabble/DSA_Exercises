@@ -70,7 +70,7 @@ public class Point implements Comparable<Point> {
             return +0.0;
         }
 
-        return (double)(that.y - this.y)/(that.x - this.x);
+        return (double) (that.y - this.y)/(that.x - this.x);
     }
 
     /**
@@ -88,17 +88,17 @@ public class Point implements Comparable<Point> {
     public int compareTo(Point that) {
         /* YOUR CODE HERE */
 
-        // If points are equal
+        // this equals that
         if (this.y == that.y && this.x == that.x) {
             return 0;
         }
 
-        // If this < that 
+        // this is less than that
         if (this.y < that.y || (this.y == that.y && this.x < that.x)) {
             return -1;
         }
 
-        // if this > that
+        // this is bigger than that
         return 1;
     }
 
@@ -147,12 +147,12 @@ public class Point implements Comparable<Point> {
 
         StdOut.println("Test compareTo method:");
         Point p = new Point(0, 0);
-        Point p1 = new Point(1,2);
+        Point p1 = new Point(1, 2);
         StdOut.println(p.compareTo(p1));
 
         StdOut.println("Test slopeTo method:");
-        Point p2 = new Point(0,3);
-        Point p3 = new Point(2,3);
+        Point p2 = new Point(0, 3);
+        Point p3 = new Point(2, 3);
         StdOut.println(p1.slopeTo(p1));
         StdOut.println(p.slopeTo(p2));
         StdOut.println(p1.slopeTo(p2));

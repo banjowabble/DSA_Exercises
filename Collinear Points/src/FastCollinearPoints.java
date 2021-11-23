@@ -1,8 +1,7 @@
-import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.StdDraw;
-
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class FastCollinearPoints {
 
@@ -15,29 +14,51 @@ public class FastCollinearPoints {
         // check for exceptions
         checkExceptions(points);
 
-        this.lineSegments = new LineSegment[2];
-        this.size = 0;
-        LinkedList<Point> collinearPoints = new LinkedList<>();
+        lineSegments = new LineSegment[2]; // size = 2 (1 is also okay) to prevent resizing right from the beginning
+        size = 0;
+        LinkedList<Point> collinearPoints = new LinkedList<>(); // temporary storage for potential collinear points
+        Point prevPoint = points[0]; // to store the most recently accessed point
 
-        for (Point point : points) {
+        // an ascending points array (to iterate without meeting the same point again)
+        Point[] sortedPoints = Arrays.copyOf(points, points.length);
+        Arrays.sort(sortedPoints);
+
+        // for each point sort the entire array according to every other point's slope compared to this point
+        for (Point point : sortedPoints) {
             Arrays.sort(points, point.slopeOrder());
-            double prevSlope = 0.0;
+            double prevSlope = 0.0; // slope of the previously checked point
 
+            // check every other point's slope, if 3 (or more) adjacent points have equal slopes
+            // then they, with the current outer loop's point, are collinear
             for (int i = 0; i < points.length; i++) {
                 double currentSlope = point.slopeTo(points[i]);
+
+                // if start of a new cycle OR found an unsatisfactory adjacent Point
                 if (i == 0 || currentSlope != prevSlope) {
-                    if(collinearPoints.size() >= 3) {
-                        //Collections.sort(collinearPoints);
-                        this.addLine(new LineSegment(collinearPoints.getFirst(), collinearPoints.getLast()));
+
+                    // if there exists 3 or more satisfactory adjacent points in the temp storage
+                    if (collinearPoints.size() >= 3) {
+
+                        //add the invoking point to the set
+                        if (i == 0) collinearPoints.add(prevPoint);
+                        else collinearPoints.add(point);
+
+                        // make the set into a unique ascending set of collinear points to avoid duplications
+                        Collections.sort(collinearPoints); // I learned this from coursera's discussion section
+
+                        // save the previously found segment that was stored in temporary storage
+                        addLine(new LineSegment(collinearPoints.getFirst(), collinearPoints.getLast()));
                         collinearPoints.getFirst().drawTo(collinearPoints.getLast());
-                        StdDraw.show();
                     }
+                    // else if there aren't any segment clear the temporary storage
                     collinearPoints.clear();
                 }
 
+                // else add it to the temporary storage
                 collinearPoints.add(points[i]);
                 prevSlope = currentSlope;
             }
+            prevPoint = point;
         }
 
     }
@@ -61,72 +82,43 @@ public class FastCollinearPoints {
 
     // Add a new line segment
     private void addLine(LineSegment item) {
+        boolean isDuplicate = false;
         if (item == null) {
             throw new IllegalArgumentException();
         }
 
-        if(size == lineSegments.length) {
+        if (size == lineSegments.length) {
             resize(2 * lineSegments.length);
         }
 
-        lineSegments[size++] = item;
+        // check for duplicate line segments
+        for (LineSegment lineSegment : lineSegments) {
+            if (lineSegment != null && Objects.equals(lineSegment.toString(), item.toString())) {
+                isDuplicate = true;
+                break;
+            }
+        }
+        if (!isDuplicate) {
+            lineSegments[size++] = item;
+        }
     }
 
     // Check for exceptions
-    private void checkExceptions(Point[] points){
-        if(points == null) {
+    private void checkExceptions(Point[] points) {
+        if (points == null) {
             throw new IllegalArgumentException();
         }
+        for (int i = 0; i < points.length; i++) {
+            for (int j = 0; j < points.length; j++) {
 
-        for (int i = 0; i < points.length; i ++) {
-            for(int j = 0; j < points.length; j++) {
-
-                if(points[i] == null || points[j] == null) {
+                if (points[i] == null || points[j] == null) {
                     throw new IllegalArgumentException();
                 }
 
-                if(i != j && points[i].compareTo(points[j]) == 0) {
+                if (i != j && points[i].compareTo(points[j]) == 0) {
                     throw new IllegalArgumentException();
                 }
             }
         }
-    }
-
-    public static void main(String[] args) {
-        In in = new In("files\\grid4x4.txt");      // input file
-        int n = in.readInt();
-
-        // padding for drawing
-        int padding = 1000;
-
-        // set draw scale
-        StdDraw.setXscale(-padding, Short.MAX_VALUE + padding);
-        StdDraw.setYscale(-padding, Short.MAX_VALUE + padding);
-
-        // Index of array
-        int index = 0;
-
-        // turn on animation mode
-        StdDraw.enableDoubleBuffering();
-
-        // Create array
-        Point[] points = new Point[n];
-
-        points[index] = new Point(in.readInt(), in.readInt());
-        points[index].draw();
-        StdDraw.show();
-
-        index++;
-
-        while (!in.isEmpty()) {
-            points[index] = new Point(in.readInt(), in.readInt());
-            points[index].draw();
-            StdDraw.show();
-
-            index++;
-        }
-
-        FastCollinearPoints fclp = new FastCollinearPoints(points);
-        //LineSegment[] lineSegments = fclp.lineSegments();
     }
 }
