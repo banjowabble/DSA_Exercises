@@ -1,3 +1,5 @@
+package Ex1;
+
 import edu.princeton.cs.algs4.*;
 
 public class SeparateChainingHashST<Key, Value> {
@@ -154,7 +156,7 @@ public class SeparateChainingHashST<Key, Value> {
 
 
     /**
-     * Unit tests the {@code SeparateChainingHashST} data type.
+     * Unit tests the {@code Ex1.SeparateChainingHashST} data type.
      *
      * @param args the command-line arguments
      */

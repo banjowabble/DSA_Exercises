@@ -1,6 +1,7 @@
+package Ex1;
+
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Queue;
-import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
 public class LinearProbingHashST<Key, Value> {
@@ -218,7 +219,7 @@ public class LinearProbingHashST<Key, Value> {
 
 
     /**
-     * Unit tests the {@code LinearProbingHashST} data type.
+     * Unit tests the {@code Ex1.LinearProbingHashST} data type.
      *
      * @param args the command-line arguments
      */

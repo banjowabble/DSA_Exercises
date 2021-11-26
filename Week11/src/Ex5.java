@@ -1,5 +1,3 @@
-import edu.princeton.cs.algs4.In;
-
 import java.util.*;
 
 public class Ex5 {
@@ -48,6 +46,36 @@ public class Ex5 {
                 i++;
             }
         }
+        return result;
+    }
+
+    public static List<Integer> countingSort(List<Integer> arr) {
+        // Write your code here
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < 1000; i++) {
+            result.add(0);
+        }
+        for (int i = 0; i < arr.size(); i++) {
+            int value = result.get(arr.get(i)); //Integer objects are immutable (bất biến)
+            value += 1;
+            result.set(arr.get(i), value);
+        }
+        return result;
+    }
+
+    public static List<Integer> MissingNumbers3(List<Integer> arr, List<Integer> brr) {
+        List<Integer> arrFreq = countingSort(arr);
+        List<Integer> brrFreq = countingSort(brr);
+        List<Integer> result = new ArrayList<>();
+
+        for (Integer integer : brr) {
+            if (brrFreq.get(integer) > arrFreq.get(integer)) {
+                if (!result.contains(integer)) {
+                    result.add(integer);
+                }
+            }
+        }
+        Collections.sort(result);
         return result;
     }
 }
