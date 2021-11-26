@@ -1,3 +1,5 @@
+import edu.princeton.cs.algs4.In;
+
 import java.util.*;
 
 public class Ex5 {
@@ -33,24 +35,19 @@ public class Ex5 {
     }
 
     public static List<Integer> anotherMissingNumbers(List<Integer> arr, List<Integer> brr) {
-        List<Integer> a = new ArrayList<>(List.copyOf(arr));
-        Collections.sort(a);
-        List<Integer> b = new ArrayList<>(List.copyOf(brr));
-        Collections.sort(b);
+        Collections.sort(arr);
+        Collections.sort(brr);
         List<Integer> result = new ArrayList<>();
-        int offset = 0;
-
-        for (Integer integer : a) {
-            int diff = 0;
-            while (Objects.equals(b.get(offset), integer)) {
-                diff++;
-                offset++;
-            }
-            if (diff - 1 > 0) {
-                for (int j = 0; j < diff - 1; j++) result.add(integer);
+        int i = 0;
+        for (Integer integer : brr) {
+            if (i >= arr.size() || !Objects.equals(arr.get(i), integer)) {
+                if (!result.contains(integer)) {
+                    result.add(integer);
+                }
+            } else {
+                i++;
             }
         }
-
         return result;
     }
 }
