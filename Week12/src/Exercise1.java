@@ -10,7 +10,7 @@ public class Exercise1 {
         static int[] dx = {1, 1, 0, -1, -1, -1, 0, 1};
         static int[] dy = {0, 1, 1, 1, 0, -1, -1, -1};
 
-        // dfs
+        // count_connected
         static int count_connected(int i, int j) {
             int count = 1; // count itself
             visited[i][j] = true;
@@ -19,7 +19,8 @@ public class Exercise1 {
                 int y = j + dy[i];
 
                 if(check(x, y) && !visited[x][y] && grid[x][y] == 1) // if found a satisfactory adjacent cell
-                    count += count_connected(x, y); // increment current count by the results of consecutive calls of dfs
+                    // increment current count by results of consecutive count_connected calls
+                    count += count_connected(x, y);
             }
             return count;
         }
