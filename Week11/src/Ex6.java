@@ -54,7 +54,6 @@ public class Ex6 {
             int size = treeSet.size();
             myInteger middleNumber = getMiddleNumber(treeSet, size);
             myInteger higher = treeSet.higher(middleNumber);
-            assert higher != null;
             if (size % 2 == 0) {
                 medians.set(i, (double) (higher.getData() + middleNumber.getData()) / 2);
             } else {
